@@ -1,13 +1,13 @@
 import BlogList from "./BlogList";
 import UseFetch from "./useFetch";
 const Home = () => {
-   
-      const {data,isPending,error,handleDelete} = UseFetch("http://localhost:8000/blogs")
+      const {data,isPending,error,handleDelete} = UseFetch("http://localhost:3000/blogs")
+      console.log(data);
     return ( 
         <div className="home"> 
-        {error && <div>wrong</div>}
+        {error && <div>{error}</div>}
         {isPending && <div>Loading...</div> }
-        {data && <BlogList blogs={data} handleDelete={handleDelete} title={"All Blogs"}/>}
+        {data.length !=0 && <BlogList blogs={data} handleDelete={handleDelete} title={"All Blogs"}/>}
         </div>
      );
 }

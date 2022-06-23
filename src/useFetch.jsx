@@ -9,7 +9,8 @@ const UseFetch=(url)=>{
         if(!res.ok){
             throw Error("{error}")
         }
-        return res.json()})
+        return res.json()
+        })
         .then((data)=>{
             setData(data) ;
             setIsPending(false);
