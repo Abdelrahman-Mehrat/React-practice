@@ -1,0 +1,10 @@
+.switch-userForm-btn {
+  display: flex;
+  justify-content: center;
+}
+.userForm-input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 4px;
+  /* border-radius: 5px; */
+}

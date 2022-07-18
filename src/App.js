@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import MainContainer from "./Components/MainContainer/MainContainer";
 
 function App() {
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      fname: "Leanne Graham",
+      lname: "Bret",
+      city: "Alex",
+      email: "Sincere@april.biz",
+      phone: "1-770-736-8031 x56442",
+    },
+    {
+      id: 2,
+      fname: "Leanne Graham",
+      lname: "Bret",
+      city: "Alex",
+      email: "Sincere@april.biz",
+      phone: "1-770-736-8031 x56442",
+    },
+  ]);
+  const HandleDelete = (e) => {
+    const newUsers = users.filter((user) => user.id != e.target.id);
+    setUsers(newUsers);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <MainContainer users={users} HandleDelete={HandleDelete} />
     </div>
   );
 }
