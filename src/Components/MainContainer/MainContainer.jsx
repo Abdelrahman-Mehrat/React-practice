@@ -1,29 +1,42 @@
 import SingleUser from "../SingleUser/SingleUser";
 import "./MainContainer.css";
 import Table from "react-bootstrap/Table";
-import AddUser from "../AddUser/AddUser";
-const MainContainer = ({ users, HandleDelete }) => {
-  console.log(users);
-
+const MainContainer = ({
+  users,
+  HandleDelete,
+  handleUpdateUserChange,
+  handleUpdateUser,
+}) => {
+  // console.log(users);
   return (
     <div>
       <div className="container">
-        <AddUser />
         <Table className="" striped variant="dark" bordered hover>
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>City</th>
+              <th>id</th>
+              <th>Fname</th>
+              <th>Lname</th>
+
               <th>Email</th>
-              <th>Phone</th>
               <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => {
-              return <SingleUser user={user} HandleDelete={HandleDelete} />;
+            {users.map((user, i) => {
+              return (
+                <SingleUser
+                  handleUpdateUserChange={handleUpdateUserChange}
+                  handleUpdateUser={handleUpdateUser}
+                  user={user}
+                  index={i + 1}
+                  HandleDelete={() => {
+                    HandleDelete(user.id);
+                  }}
+                />
+              );
             })}
           </tbody>
         </Table>

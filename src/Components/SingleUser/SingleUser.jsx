@@ -1,20 +1,74 @@
+import { useState } from "react";
 import "./SingleUser.css";
-const SingleUser = ({ user, HandleDelete }) => {
+const SingleUser = ({
+  user,
+  HandleDelete,
+  index,
+  id,
+  handleUpdateUserChange,
+  handleUpdateUser,
+}) => {
+  const [toggleUpdate, setToggleUpdate] = useState(true);
   return (
-    <tr>
+    <tr id={user.id}>
+      <td>{index}</td>
       <td>{user.id}</td>
-      <td>{`${user.fname} - ${user.lname}`}</td>
-      <td>{user.city}</td>
-      <td>{user.email}</td>
-      <td>{user.phone}</td>
       <td>
-        {" "}
-        <button>Update</button>{" "}
+        {toggleUpdate ? (
+          user.fname
+        ) : (
+          <input
+            defaultValue={user.fname}
+            name="fname"
+            onChange={handleUpdateUserChange}
+          />
+        )}
       </td>
       <td>
-        <button id={user.id} onClick={HandleDelete}>
-          Delete
-        </button>
+        {toggleUpdate ? (
+          user.lname
+        ) : (
+          <input
+            defaultValue={user.lname}
+            name="lname"
+            onChange={handleUpdateUserChange}
+          />
+        )}
+      </td>
+      <td>
+        {toggleUpdate ? (
+          user.email
+        ) : (
+          <input
+            defaultValue={user.email}
+            name="email"
+            onChange={handleUpdateUserChange}
+          />
+        )}
+      </td>
+      <td>
+        {" "}
+        {!toggleUpdate ? (
+          <button
+            onClick={() => {
+              setToggleUpdate(!toggleUpdate);
+              handleUpdateUser(user);
+            }}
+          >
+            save Update
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setToggleUpdate(!toggleUpdate);
+            }}
+          >
+            Update
+          </button>
+        )}
+      </td>
+      <td>
+        <button onClick={HandleDelete}>Delete</button>
       </td>
     </tr>
   );

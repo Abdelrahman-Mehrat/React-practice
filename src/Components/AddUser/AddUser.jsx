@@ -2,27 +2,31 @@ import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./AddUser.css";
-const AddUser = () => {
+const AddUser = ({ handleAddUser, newUser, handleAddUserChange }) => {
   const [toggleForm, setToggleForm] = useState(false);
   const handleForm = () => {
     setToggleForm(!toggleForm);
     console.log(!toggleForm);
   };
+  const { fname, lname, email } = newUser;
   return (
-    <div>
+    <div className="container">
       <div className="switch-userForm-btn">
         <button className="btn btn-primary" onClick={handleForm}>
-          Add
+          open form
         </button>
       </div>
       {toggleForm ? (
-        <form action="" className="userForm ">
+        <form action="" onSubmit={handleAddUser} className="userForm ">
           <Row>
             <Col md={6} className="px-3">
               <input
                 type="text"
                 className="userForm-input"
                 placeholder="Fname"
+                name="fname"
+                value={fname}
+                onChange={handleAddUserChange}
               />
             </Col>
             <Col md={6} className="px-3">
@@ -30,28 +34,24 @@ const AddUser = () => {
                 type="text"
                 className="userForm-input"
                 placeholder="Lname"
+                name="lname"
+                value={lname}
+                onChange={handleAddUserChange}
               />
             </Col>
-            <Col md={6} className="px-3">
-              <input
-                type="text"
-                className="userForm-input"
-                placeholder="City"
-              />
-            </Col>
+
             <Col md={6} className="px-3">
               <input
                 type="text"
                 className="userForm-input"
                 placeholder="Email"
+                name="email"
+                value={email}
+                onChange={handleAddUserChange}
               />
             </Col>
-            <Col md={6} className="px-3">
-              <input
-                type="number"
-                className="userForm-input"
-                placeholder="Phone Number"
-              />
+            <Col md={12}>
+              <button className="mx-auto add-user-Btn">Add User</button>
             </Col>
           </Row>
         </form>
