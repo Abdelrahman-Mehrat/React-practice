@@ -10,14 +10,17 @@ const AddUser = ({ handleAddUser, newUser, handleAddUserChange }) => {
   };
   const { fname, lname, email } = newUser;
   return (
-    <div className="container">
-      <div className="switch-userForm-btn">
-        <button className="btn btn-primary" onClick={handleForm}>
-          open form
+    <div className="container mb-3">
+      <div className="switch-userForm-btn ">
+        <button
+          className={!toggleForm ? "openBtn" : "closeBtn"}
+          onClick={handleForm}
+        >
+          {!toggleForm ? `open form` : `close form`}
         </button>
       </div>
       {toggleForm ? (
-        <form action="" onSubmit={handleAddUser} className="userForm ">
+        <form action="" onSubmit={handleAddUser} className="userForm mt-4">
           <Row>
             <Col md={6} className="px-3">
               <input
@@ -51,7 +54,7 @@ const AddUser = ({ handleAddUser, newUser, handleAddUserChange }) => {
               />
             </Col>
             <Col md={12}>
-              <button className="mx-auto add-user-Btn">Add User</button>
+              <button className="mx-auto add-user-Btn mt-3">Add User</button>
             </Col>
           </Row>
         </form>

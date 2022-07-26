@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import MainContainer from "./Components/MainContainer/MainContainer";
 import AddUser from "./Components/AddUser/AddUser.jsx";
+import NavBarTitle from "./Components/FixedNavBar/NavBarTitle";
 
 function App() {
   const [users, setUsers] = useState([
@@ -13,25 +14,19 @@ function App() {
     },
     {
       id: 2,
-      fname: "Leanne Graham",
-      lname: "Bret",
-      email: "Sincere@april.biz",
+      fname: " Graham",
+      lname: "abdo",
+      email: "mail2@april.biz",
     },
   ]);
-  const [users2, setUsers2] = useState([
-    {
-      id: 1,
-      fname: "Leanne ",
-      lname: "Bret",
-      email: "Sincere@april.biz",
-    },
-    {
-      id: 2,
-      fname: "Leanne Graham",
-      lname: "Bret",
-      email: "Sincere@april.biz",
-    },
-  ]);
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("all-data")));
+    if (JSON.parse(localStorage.getItem("all-data")) !== null) {
+      setUsers(JSON.parse(localStorage.getItem("all-data")));
+    }
+  }, []);
+  const [updateUser, setUpdateUser] = useState({});
+  // add user state
   const [newUser, setNewUser] = useState({
     id: "",
     fname: "",
@@ -42,11 +37,15 @@ function App() {
   const HandleDelete = (target) => {
     const newUsers = users.filter((user) => user.id != target);
     setUsers(newUsers);
+    localStorage.setItem("all-data", JSON.stringify(newUsers));
   };
+  // form add user functions
   const handleAddUser = (e) => {
     e.preventDefault();
-    console.log();
+    console.log(e.target);
     setUsers([...users, newUser]);
+    localStorage.setItem("all-data", JSON.stringify([...users, newUser]));
+    // reset input values
     setNewUser({
       id: "",
       fname: "",
@@ -55,6 +54,7 @@ function App() {
     });
   };
   const handleAddUserChange = (e) => {
+    console.log(users[users.length - 1].id);
     setNewUser({
       ...newUser,
       id: users.length + 1,
@@ -62,32 +62,25 @@ function App() {
     });
   };
   // updated logic
-  const [updateUser, setUpdateUser] = useState({});
-  const handleUpdateUserChange = (e) => {
-    // console.log(e.target.name);
-    const selectedUser = users.filter((user) => {
-      return user.id == e.target.parentNode.parentNode.id;
-    });
-    setUpdateUser({ ...selectedUser[0], [e.target.name]: e.target.value });
+  const handleUpdateUserChange = (e, user) => {
+    setUpdateUser({ ...user, [e.target.name]: e.target.value });
+    console.log(updateUser);
   };
-  const handleUpdateUser = (singleUser) => {
+  const handleUpdateUser = (event, singleUser) => {
+    console.log(updateUser);
     const newState = users.map((user) => {
-      // 👇️ if id equals 2 replace object
       if (user.id === singleUser.id) {
         return updateUser;
       }
-
-      // 👇️ otherwise return object as is
       return user;
     });
-
-    setUsers(newState);
-    // setUsers([...users, updateUser]);
-    // console.log(users2[1]);
     console.log(newState);
+    setUsers(newState);
+    localStorage.setItem("all-data", JSON.stringify(newState));
   };
   return (
-    <div>
+    <div className="homePage-container">
+      <NavBarTitle />
       <AddUser
         handleAddUser={handleAddUser}
         newUser={newUser}

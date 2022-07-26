@@ -20,7 +20,9 @@ const SingleUser = ({
           <input
             defaultValue={user.fname}
             name="fname"
-            onChange={handleUpdateUserChange}
+            onChange={(e) => {
+              handleUpdateUserChange(e, user);
+            }}
           />
         )}
       </td>
@@ -31,7 +33,9 @@ const SingleUser = ({
           <input
             defaultValue={user.lname}
             name="lname"
-            onChange={handleUpdateUserChange}
+            onChange={(e) => {
+              handleUpdateUserChange(e, user);
+            }}
           />
         )}
       </td>
@@ -42,7 +46,9 @@ const SingleUser = ({
           <input
             defaultValue={user.email}
             name="email"
-            onChange={handleUpdateUserChange}
+            onChange={(e) => {
+              handleUpdateUserChange(e, user);
+            }}
           />
         )}
       </td>
@@ -50,9 +56,9 @@ const SingleUser = ({
         {" "}
         {!toggleUpdate ? (
           <button
-            onClick={() => {
+            onClick={(e) => {
+              handleUpdateUser(e, user);
               setToggleUpdate(!toggleUpdate);
-              handleUpdateUser(user);
             }}
           >
             save Update
