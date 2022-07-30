@@ -18,7 +18,6 @@ const HomePage = () => {
     },
   ]);
   useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem("all-data")));
     if (JSON.parse(localStorage.getItem("all-data")) !== null) {
       setUsers(JSON.parse(localStorage.getItem("all-data")));
     }
