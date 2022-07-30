@@ -1,9 +1,14 @@
-import { createContext, useContext } from "react";
-export const LogUserContext = createContext("aa");
+import { createContext, useContext, useState } from "react";
+export const LogUserContext = createContext();
 export const LogProvider = ({ children }) => {
-  const testValue = "My Context Value";
+  const [name, setName] = useState("a");
+  const [isLogin, setIsLogin] = useState(null);
+  const handleName = (e) => {
+    setName("Waleed");
+    setIsLogin(true);
+  };
   return (
-    <LogUserContext.Provider value={testValue}>
+    <LogUserContext.Provider value={{ name, handleName, isLogin }}>
       {children}
     </LogUserContext.Provider>
   );

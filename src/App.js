@@ -12,7 +12,6 @@ import UserProfile from "./Components/Pages/Profile/UserProfile";
 // style
 import "./App.css";
 function App() {
-  const [isLogin, setIsLogin] = useState(null);
   return (
     <BrowserRouter>
       <NavBarTitle />
@@ -33,7 +32,7 @@ function App() {
         <Route
           path="/userprofile"
           element={
-            <ProtectedRoute isLogin={isLogin}>
+            <ProtectedRoute>
               <UserProfile />
             </ProtectedRoute>
           }
